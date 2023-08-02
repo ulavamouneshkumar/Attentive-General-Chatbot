@@ -1,0 +1,512 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello"
+      ],
+      "responses": [
+        "Hello, how may I assist you today?"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "noanswer",
+      "patterns": [],
+      "responses": [
+        "Sorry, can't understand you. If you need any assistance, you contact the office!",
+        "Please give me more info!!",
+        "Not sure I understand!"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Goodbye"
+      ],
+      "responses": [
+        "Goodbye! Have a great day!",
+        "See you later! Take care!",
+        "Farewell! It was nice chatting with you.",
+        "Bye! Don't hesitate to come back if you need anything else.",
+        "Have a good one!"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "That's helpful",
+        "Thanks for helping me",
+        "thank you"
+      ],
+      "responses": [
+        "You're welcome!",
+        "No problem, happy to help.",
+        "Anytime!",
+        "Don't mention it.",
+        "My pleasure.",
+        "Glad I could assist you.",
+        "You're always welcome to ask for help."
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "options",
+      "patterns": [
+        "What you can do for me?",
+        "Who are you?",
+        "How you could help me?",
+        "What you can do?",
+        "What help you provide?",
+        "How you can be helpful?",
+        "What support is offered",
+        "How can you help me?"
+      ],
+      "responses": [
+        "Greetings! I'm GVP Bot.\nI can provide you information about:\n*Aavishkar event details\n*Courses details\n*Contact details\n*CSE Academic details.",
+        "Hello there! I'm GVP Bot. \nI'm here to provide you information about:\n*Aavishkar event\n*Courses details\n*Contact details\n*CSE Academic details."
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "contact",
+      "patterns": [
+        "How to contact GVP?",
+        "How to reach out to GVP?",
+        "GVP contact details",
+        "contact details",
+        "contact details of GVP",
+        "Provide some contact details about GVP"
+      ],
+      "responses": [
+        "Contact Information-\n*location_on: Gayatri Valley, Rushikonda, Vishakhapatnam, Andhra Pradesh 530045, India.\n*call: (0891) 2790084, 2790085\n*email: gvp_pg@yahoo.co.in\n*College Website: http://www.gvpcdpgc.edu.in/\n*Affiliated with: Andhra University(AU)\n*Approved By: AICTE||NAAC||NBA"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "courses",
+      "patterns": [
+        "course details",
+        "what are the courses?",
+        "Courses of GVP?",
+        "Courses offered by GVP?",
+        "GVP courses",
+        "What are the courses of GVP?",
+        "What are the courses offered by GVP"
+      ],
+      "responses": [
+        "Courses-\n*Arts Courses\n*Engineering Courses\n*Science Courses\n*Management Courses\n*Commerce Courses\n*Informational Technology Courses\n*Vocational Courses"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Aavishkar",
+      "patterns": [
+        "What is aavishkar?",
+        "What is aavishkar event?",
+        "What do you mean by aavishkar?",
+        "What aavishkar is?",
+        "What is the aavishkar?"
+      ],
+      "responses": [
+        "Aavishkar is the ACM Student Chapter at GVP College's Department of Computer Science and Engineering. They host local events such as workshops, paper presentations, and hackathons to provide opportunities for members to network, learn, and develop their skills. They have successfully completed two seasons."
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Aavishkarevents",
+      "patterns": [
+        "What are the aavishkar events?",
+        "What are the events in aavishkar?",
+        "aavishkar events",
+        "events in aavishkar",
+        "What are the events hosted by GVP?",
+        "What events are there in aavishkar?"
+      ],
+      "responses": [
+        "During Season 1, Aavishkar hosted a 3-day event featuring\n*Workshops on NodeJS and Network Emulation & Testing\n*Hackathon(Bright-A-Thon 1.0)\n*Coding competition(Code the Bits)\n*Paper presentations(Project-EXpo)\n*Posture presentations\n*Games like BGMI-Battle and Treasure Hunt\n*Culminating with a closing ceremony.\nIn Season 2, they organized\n*Workshops on Full stack and IOT\n*8-hour Hackathon\n*Coding competition\n*Posture presentations\n*Paper presentations\n*Games like quiz\n*Valedictory and cultural events."
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "organisers",
+      "patterns": [
+        "Who are organisers of aavishkar?",
+        "Who are the organisers of aavishkar?",
+        "organisers of aavishkar",
+        "Aavishkar organisers"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "organisers1",
+      "patterns": [
+        "Who are organisers of season1?",
+        "Who are the organisers of season1?",
+        "organisers of season1",
+        "Aavishkar season1 organisers"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "organisers2",
+      "patterns": [
+        "Who are organisers ofseason2?",
+        "Who are the organisers of season2?",
+        "organisers of season2",
+        "Aavishkar season2 organisers"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "posture",
+      "patterns": [
+        "Who is posture presentation winner?",
+        "Who is the posture presentation winner?",
+        "posture presentation winner ",
+        "winner of posture presentation"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "posture1",
+      "patterns": [
+        "Who is posture presentation winner of season1?",
+        "Who is the posture presentation winner of season1?",
+        "posture presentation winner of season1",
+        "winner of posture presentation season1"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "posture2",
+      "patterns": [
+        "Who is posture presentation winner of season2?",
+        "Who is the posture presentation winner of season2?",
+        "posture presentation winner of season2",
+        "winner of posture presentation season2"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "paper",
+      "patterns": [
+        "Who is paper presentation winner?",
+        "Who is the paper presentation winner?",
+        "paper presentation winner ",
+        "winner of paper presentation"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "paper1",
+      "patterns": [
+        "Who is paper presentation winner of season1?",
+        "Who is the paper presentation winner of season1?",
+        "paper presentation winner of season1 ",
+        "winner of paper presentation of season1"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "paper2",
+      "patterns": [
+        "Who is paper presentation winner of season2?",
+        "Who is the paper presentation winner of season2?",
+        "paper presentation winner of season2",
+        "winner of paper presentation of season2"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "pubg",
+      "patterns": [
+        "Who is paper presentation winner?",
+        "Who is the paper presentation winner?",
+        "paper presentation winner ",
+        "winner of paper presentation"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "trasure hunt",
+      "patterns": [
+        "Who is paper presentation winner?",
+        "Who is the paper presentation winner?",
+        "paper presentation winner ",
+        "winner of paper presentation"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "cricket",
+      "patterns": [
+        "Who is paper presentation winner?",
+        "Who is the paper presentation winner?",
+        "paper presentation winner ",
+        "winner of paper presentation"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "quiz",
+      "patterns": [
+        "Who is paper presentation winner?",
+        "Who is the paper presentation winner?",
+        "paper presentation winner ",
+        "winner of paper presentation"
+      ],
+      "responses": [
+        "Organisers of Aavishkar season1 are:\n* "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "ACM",
+      "patterns": [
+        "What is ACM?",
+        "What do you mean by ACM?",
+        "What do you mean by ACM?",
+        "What ACM is?"
+      ],
+      "responses": [
+        "ACM(Association for Computing Machinery) is the world's oldest and largest professional organization for computer science professionals and students. Founded in 1947, it is the largest and oldest international computing society. ACM aims to advance computing as a science and profession and promote member development, networking, and collaboration."
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Chiefguests1",
+      "patterns": [
+        "Who are chief guests of season1?",
+        "chief guests of season1",
+        "Aavishkar season1 chief guests"
+      ],
+      "responses": [
+        "Chief Guest of Aavishkar season-1 is Mr.Sitarama Penumetsa,General Manager,Candela Technologies "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Chiefguests2",
+      "patterns": [
+        "Who are chief guests of season2?",
+        "chief guests of season2",
+        "Aavishkar season2 chief guests"
+      ],
+      "responses": [
+        "Chief Guest of Aavishkar season-2 are \nMr.T.Anil Kumar,CEO,APIS,Govt of AP and Dr.Bijay Kumar Sahu,Sr.regional Manager,NRDC,Govt. of india"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "ACM events",
+      "patterns": [
+        "What do you mean by ACM events?",
+        "What are ACM local events?",
+        "What are ACM events",
+        "What are the ACM local events?"
+      ],
+      "responses": [
+        "ACM's local and student chapters frequently organize events like guest lectures, workshops, and hackathons that enable members to network, learn, and enhance their skills."
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus",
+      "patterns": [
+        "Academic details",
+        "Academic syllabus",
+        "syllabus",
+        "subjects",
+        "can u give my semister syallabus?"
+      ],
+      "responses": [
+        "May I know your current academic status?\nFor Ex- CSE 1st Year 1st semester"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus1-1",
+      "patterns": [
+        "CSE 1st year 1st semester",
+        "CSM 1st year 1st semester"
+      ],
+      "responses": [
+        "CS1101-Engineering Mathematics-I(Partial Differentiation, Multiple Integrals,Fourier Series and Applications)\n CS1102-Green Chemistry \n CS1103-English \n CS1104-Computer Programming Using 'C' \n CS1105-IT Essentials \n CS1106-Communication Skills Lab \n CS1107-Green Chemistry Lab \n CS1108-Computer Programming using 'C' LAB "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus1-2",
+      "patterns": [
+        "CSE 1st year 2nd semester",
+        "CSM 1st year 2nd semester"
+      ],
+      "responses": [
+        "CS1201-Engineering Mathematics-II (Matrix Algebra, Ordinary Differential Equations and Laplace Transforms) \n CS1202-Engineering physics \n CS1203-Data Structures Using 'C' \n CS1204-Engineering Graphics \n CS1205-Discrete Mathematical Structures \n CS1206-IT Workshop Lab \n CS1207-Engineering Physics Lab \n CS1208-Data Structures Lab "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus2-1",
+      "patterns": [
+        "CSE 2nd year 1st semester"
+      ],
+      "responses": [
+        "CS2101-Probability, Statistics and Queuing Theory \n CS2102-Data Structures \n CS2103-Computer Organization and Architecture \n CS2104-Operating Systems \n CS2105-Object Oriented Programming through Java \n CS2106-Data Structures Using ‘C’ Lab \n CS2107-Object Oriented Programming (through Java) Lab \n CS2108-Operating Systems Lab \n  CS2109-Design Thinking and Innovation \n CS21010-Environmental Science"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus2-2",
+      "patterns": [
+        "CSE 2nd year 2nd semester"
+      ],
+      "responses": [
+        "CS2201-Microprocessors & Microcontrollers \n CS2202-Design and Analysis of Algorithms \n CS2203-Database Management Systems \n CS2204-Formal Languages and Automata Theory \n CS2205-Managerial Economics \n CS2206-DEMP Lab \n CS2207-Database Management Systems Lab \n CS2209-Professional Ethics And Universal Human Values \n CS22010-Massive Open Online Courses \n CS22011-NSS / NCC "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus3-1",
+      "patterns": [
+        "CSE 3rd year 1st semester"
+      ],
+      "responses": [
+        "CS3101-Data Warehousing and Data Mining \n CS3102-Compiler Design \n CS3103-Computer Networks \n CS3104-Open Elective – I: C++ Programming \n CS3105-Elective-I(Introduction to Data Science,Embedded Systems,Introduction to Arduino and Raspberry Pi) \n CS3106-Computer Networks Lab \n CS3107-Data Mining Lab \n CS3108-Skill Course – 3 C++ Programming \n CS3109-Technical Communication & Soft Skills"
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus3-2",
+      "patterns": [
+        "CSE 3rd year 2nd semester"
+      ],
+      "responses": [
+        "CS3201-Object-Oriented Software Engineering \n CS3202-Web Technologies \n CS3203-Artificial Intelligence \n CS3204-Open Elective-II:Programming in Java \n CS3205-Elective-II(Introduction to Soft Computing,Big Data Analytics,Cryptography & Network Security) \n CS3206-Software Engineering & Mini Project Lab \n CS3207-Web Technologies Lab \n CS3208-Elective – II Lab \n CS3209-Skill Course – 4: Advanced Java Programming \n CS32010-Intellectual Property Rights "
+      ],
+      "context": [
+        ""
+      ]
+    },
+    {
+      "tag": "Academic syallabus4-1",
+      "patterns": [
+        "CSE 4th year 1st semester"
+      ],
+      "responses": [
+        "CS4101-Elective -III( Natural Language Processing,Cloud Computing,Data Visualization & Analytics) \n CS4102-Elective –IV(Computer Vision,Wireless Sensor Networks,Cyber Security & Digital Forensics) \n CS4103-Elective -V(Machine Learning & Deep Learning,Internet of Things,Introduction to Blockchain Technologies \n CS4104-Open Elective -III: Introduction to Artificial Intelligence \n CS4105-Open Elective -IV : Introduction to Data Science \n CS4106-UHV –2: Understanding Harmony \n CS4107-Skill Course –5: Android Programming \n CS4108-Industrial/ Research Internship (2 months Mandatory after 6th Semesterto be evaluated in 7th Semester)"
+      ]
+    }
+  ]
+}

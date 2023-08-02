@@ -1,0 +1,280 @@
+import json 
+import numpy as np 
+import tensorflow as tf
+from colorama import Fore, Style
+from tensorflow import keras
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Dense, Embedding, GlobalAveragePooling1D, Input, LSTM, Dropout, Attention
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from sklearn.preprocessing import LabelEncoder
+import pickle
+import matplotlib.pyplot as plt
+
+
+bot_name = "BOT"
+
+class ChatBot:
+    def __init__(self):
+        # Load and preprocess data
+        with open('intents.json') as file:
+            self.data = json.load(file)
+         # Create lists to store training data
+        self.training_sentences = []
+        self.training_labels = []
+        self.labels = []
+        self.responses = []
+        # Loop through each intent and its patterns
+        for intent in self.data['intents']:
+            for pattern in intent['patterns']:
+                self.training_sentences.append(pattern)
+                self.training_labels.append(intent['tag'])
+            self.responses.append(intent['responses'])
+
+            if intent['tag'] not in self.labels:
+                self.labels.append(intent['tag'])
+
+        self.num_classes = len(self.labels)
+        self.lbl_encoder = LabelEncoder()
+        self.lbl_encoder.fit(self.training_labels)
+        self.training_labels = self.lbl_encoder.transform(self.training_labels)
+        self.vocab_size = 10000
+        self.embedding_dim = 256
+        self.max_len = 20
+        self.oov_token = "<OOV>"
+
+        self.tokenizer = Tokenizer(num_words=self.vocab_size, oov_token=self.oov_token)
+        self.tokenizer.fit_on_texts(self.training_sentences)
+        self.word_index = self.tokenizer.word_index
+        self.sequences = self.tokenizer.texts_to_sequences(self.training_sentences)
+        self.padded_sequences = pad_sequences(self.sequences, truncating='post', maxlen=self.max_len)
+
+        # Define the model
+        self.model = None
+        self._define_model()
+
+        # Load trained model and tokenizer
+        # Load tokenizer and model
+        ''' self.tokenizer = pickle.load(open('tokenizer.pickle', 'rb'))
+        self.model = tf.saved_model.load('chat_model')
+        self.lbl_encoder = pickle.load(open('label_encoder.pickle', 'rb'))'''
+        # Define predict function using tf.function for faster execution
+        self.predict_fn = tf.function(self.model.predict)
+
+    def _define_model(self):
+        # Input layer
+        input_layer = Input(shape=(self.max_len,))
+
+        # Embedding layer
+        embedding_layer = Embedding(self.vocab_size, self.embedding_dim, input_length=self.max_len)(input_layer)
+
+        # LSTM layer
+        lstm_layer = LSTM(128, dropout=0.2, recurrent_dropout=0.2, return_sequences=True)(embedding_layer)
+
+        # Attention layer
+        attention_layer = Attention()([lstm_layer, lstm_layer])
+
+        # Flatten layer
+        flatten_layer = GlobalAveragePooling1D()(attention_layer)
+
+        # Dropout layer
+        dropout_layer = Dropout(0.2)(flatten_layer)
+
+        # Output layer
+        output_layer = Dense(self.num_classes, activation='softmax')(dropout_layer)
+
+        # Define the model
+        self.model = Model(inputs=input_layer, outputs=output_layer)
+        self.model.compile(loss='sparse_categorical_crossentropy', optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), metrics=['accuracy'])
+       
+        self.model.summary()
+    
+        for epoch in range(100, 101, 100):
+            history = self.model.fit([self.padded_sequences], np.array(self.training_labels), epochs=epoch,
+                             batch_size=32, verbose=0)
+            if epoch % 100 == 0:
+                loss, accuracy = self.model.evaluate([self.padded_sequences], np.array(self.training_labels), verbose=0)
+                print("Epoch [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%".format(epoch, 100, loss, accuracy*100))
+            
+    # Plot accuracy
+        # Plot the metrics
+        plt.figure(figsize=(12, 4))
+        plt.subplot(1, 2, 1)
+        plt.plot(loss)
+        plt.title('Loss')
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.subplot(1, 2, 2)
+        plt.plot(accuracy)
+        plt.title('Accuracy')
+        plt.xlabel('Epoch')
+        plt.ylabel('Accuracy')
+        plt.show()
+
+        # Save the plot to a file
+        plt.savefig('metrics.png')
+
+
+        self.model = tf.keras.models.load_model('chat_model')
+        self.model.save('chat_model', save_format='tf')
+
+   
+    def _load_model_and_tokenizer(self):
+    # Load tokenizer
+        self.tokenizer = pickle.load(open('tokenizer.pickle', 'rb'))
+
+    # Load trained model
+        self.model = keras.models.load_model('chat_model')
+
+    # Load label encoder
+        self.lbl_encoder = pickle.load(open('label_encoder.pickle', 'rb'))
+
+    # Define predict function using tf.function for faster execution
+        self.predict_fn = tf.function(self.model.predict)
+
+            
+    #@tf.function
+    def predict(self, padded_seq):
+        return self.model(padded_seq)
+
+    def get_response(self, message):
+    # Load model and tokenizer
+        self._load_model_and_tokenizer()
+
+    # Tokenize user input
+        seq = self.tokenizer.texts_to_sequences([message])
+        padded_seq = pad_sequences(seq, maxlen=20, truncating='post')
+
+    # Use predict function to get predicted response
+        result = self.predict(padded_seq)
+
+    # Get index of predicted response
+        response_index = np.argmax(result, axis=-1)[0]
+
+    # Get response text from index
+        if response_index < len(self.labels):
+            tag = self.lbl_encoder.inverse_transform([response_index])[0]
+            for intent in self.data['intents']:
+                if intent['tag'] == tag:
+                    return np.random.choice(intent['responses'])
+            return "I'm sorry, I'm not sure what you're asking. Could you please try again?"
+
+
+chatbot = ChatBot()
+
+from tkinter import *
+from PIL import Image, ImageTk
+from datetime import datetime
+from tkinter import Tk, PhotoImage
+
+BG_COLOR = "#FFFFFF"
+T_COLOR="#000000"
+TEXT_COLOR = "#010C12"
+FONT = "Helvetica 14"
+FONT_BOLD = "Helvetica 13 bold"
+bot_name = "BOT"
+chatbot=ChatBot()
+class ChatApplication:
+    
+    def __init__(self):
+        self.window = Tk()
+        self._setup_main_window()
+        self._insert_message("Hi there, how may I help you?", bot_name)
+        self.window.protocol("WM_DELETE_WINDOW", self._on_close)
+        
+    def _on_close(self):
+        # get the current date and time for timestamping the file name
+        now = datetime.now()
+        dt_string = now.strftime("%Y-%m-%d_%H-%M-%S")
+        
+        # create a new file with the timestamped name and write the chat log to it
+        filename = f"chat_report_{dt_string}.txt"
+        with open(filename, "w") as f:
+            f.write(self.text_widget.get("1.0", END))
+
+        # close the chatbot window
+        self.window.destroy()
+        
+    def run(self):
+        self.window.mainloop()
+
+        
+    def _setup_main_window(self):
+        self.window.title("GVPBot")
+        logo_image = Image.open('C:/Users/lenovo/OneDrive/Desktop/Chatbot/GVP.png')
+        #logo_image = logo_image.resize((250, 250), Image.ANTIALIAS) # replace width and height with desired values
+        #logo_image.show()
+        self.logo_image = ImageTk.PhotoImage(file='C:/Users/lenovo/OneDrive/Desktop/Chatbot/GVP.png')
+        self.window.iconphoto(False,self.logo_image)
+        self.window.resizable(width=False, height=True)
+        self.window.configure(width=500, height=450, bg=BG_COLOR)
+        
+        # head label
+        head_label = Label(self.window, bg="#000000", fg="#ffffff",
+                           text="Welcome User", font=FONT_BOLD, pady=10)
+        head_label.place(relwidth=1)
+        
+        # tiny divider
+        line = Label(self.window, width=450, bg="#117BB4")
+        line.place(relwidth=1, rely=0.08, relheight=0.012)
+        
+        # text widget
+        self.text_widget = Text(self.window, width=20, height=2, bg=BG_COLOR , fg=TEXT_COLOR,
+                                font=("Comic Sans MS", 10), padx=5, pady=5)
+        self.text_widget.place(relheight=0.745, relwidth=1, rely=0.08)
+        self.text_widget.configure(cursor="arrow", state=DISABLED)
+        
+        # scroll bar
+        scrollbar = Scrollbar(self.text_widget)
+        scrollbar.place(relheight=1, relx=0.974)
+        scrollbar.configure(command=self.text_widget.yview)
+        
+        # bottom label
+        bottom_label = Label(self.window, bg=T_COLOR, height=90)
+        bottom_label.place(relwidth=1, rely=0.825)
+        
+        # message entry boxt
+        self.msg_entry = Entry(bottom_label, bg="#FFFFFF", fg=TEXT_COLOR, font=("Calibri", 12))
+        self.msg_entry.place(relwidth=0.74, relheight=0.03, rely=0.008, relx=0.011)
+        self.msg_entry.focus()
+        self.msg_entry.bind("<Return>", self._on_enter_pressed)
+        
+        # send button
+        send_button = Button(bottom_label, text="Send", font=FONT_BOLD, fg="#ffffff", width=20, bg="#000000",
+                     command=lambda: self._on_enter_pressed(None))
+        send_button.place(relx=0.77, rely=0.008, relheight=0.03, relwidth=0.22)
+
+        # Bind Enter event to change the background color
+        send_button.bind("<Enter>", lambda event: send_button.configure(bg="#444444"))
+
+        # Bind Leave event to change the background color back
+        send_button.bind("<Leave>", lambda event: send_button.configure(bg="#000000"))
+
+     
+    def _on_enter_pressed(self, event):
+        msg = self.msg_entry.get()
+        self._insert_message(msg, "YOU") 
+        
+    def _insert_message(self, msg, sender):
+        if not msg:
+            return
+       
+        self.msg_entry.delete(0, END)
+        msg1 = f"{sender}: {msg}\n\n"
+        self.text_widget.configure(state=NORMAL)
+        self.text_widget.configure(wrap=WORD)
+        if sender == "YOU":
+            msg2 = f"{bot_name} : {chatbot.get_response(msg)}\n\n"
+            self.text_widget.tag_config("sender", background="#ffffff")
+            self.text_widget.insert(INSERT, msg1, "sender")
+            self.text_widget.insert(INSERT, msg2, "bot")
+            
+        else:
+            self.text_widget.tag_config("bot", background="#EAEAEA")
+            self.text_widget.insert(INSERT, msg1, "bot")
+        self.text_widget.configure(state=DISABLED)
+        self.text_widget.see(END)
+  
+if __name__ == "__main__":
+    app = ChatApplication()
+    app.run()
